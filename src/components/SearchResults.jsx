@@ -1,4 +1,4 @@
-import { Globe, Link as LinkIcon } from 'lucide-react';
+import { Globe } from 'lucide-react';
 
 export default function SearchResults({ query, results }) {
   return (
@@ -9,7 +9,7 @@ export default function SearchResults({ query, results }) {
       <div className="space-y-4">
         {results.length === 0 ? (
           <div className="rounded-xl border border-zinc-200/60 dark:border-zinc-800/60 p-6 text-center text-zinc-600 dark:text-zinc-400">
-            No results found. Try different keywords.
+            No results found. Try different keywords or pick a suggestion above.
           </div>
         ) : (
           results.map((r) => (
@@ -37,17 +37,6 @@ export default function SearchResults({ query, results }) {
           ))
         )}
       </div>
-      {results.length > 0 && (
-        <div className="mt-6 flex justify-center">
-          <a
-            href="#"
-            onClick={(e) => e.preventDefault()}
-            className="inline-flex items-center gap-2 rounded-xl border border-zinc-200 dark:border-zinc-800 px-4 py-2 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800"
-          >
-            <LinkIcon size={16} /> More results soon
-          </a>
-        </div>
-      )}
     </div>
   );
 }
