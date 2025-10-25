@@ -12,6 +12,7 @@ function getInitialTheme() {
 export default function Header({ brandName = 'KOOGLE', tagline = 'by Kenz Media' }) {
   const [theme, setTheme] = useState(getInitialTheme);
 
+  // Apply theme to <html> and persist
   useEffect(() => {
     const root = document.documentElement;
     if (theme === 'dark') root.classList.add('dark');
@@ -19,6 +20,7 @@ export default function Header({ brandName = 'KOOGLE', tagline = 'by Kenz Media'
     localStorage.setItem('theme', theme);
   }, [theme]);
 
+  // Respect system changes if user hasn't set a manual preference
   useEffect(() => {
     const mq = window.matchMedia('(prefers-color-scheme: dark)');
     const handler = (e) => {
@@ -34,10 +36,10 @@ export default function Header({ brandName = 'KOOGLE', tagline = 'by Kenz Media'
   }, []);
 
   return (
-    <header className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/50 dark:supports-[backdrop-filter]:bg-zinc-950/50 border-b border-zinc-200/60 dark:border-zinc-800/60">
+    <header className="sticky top-0 z-40 border-b border-zinc-200/70 dark:border-zinc-800/70 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-zinc-950/40">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-rose-500 to-orange-400" />
+        <div className="flex items-center gap-3">
+          <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-rose-500 to-orange-400 shadow" />
           <div className="leading-tight">
             <div className="font-semibold tracking-tight">{brandName}</div>
             <div className="text-xs text-zinc-500 dark:text-zinc-400">{tagline}</div>
@@ -46,7 +48,7 @@ export default function Header({ brandName = 'KOOGLE', tagline = 'by Kenz Media'
         <button
           aria-label="Toggle theme"
           onClick={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))}
-          className="inline-flex items-center gap-2 rounded-lg border border-zinc-200 dark:border-zinc-800 px-3 py-1.5 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800"
+          className="inline-flex items-center gap-2 rounded-xl border border-zinc-200 dark:border-zinc-800 px-3 py-1.5 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800"
         >
           {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
           <span className="hidden sm:inline">{theme === 'dark' ? 'Day' : 'Night'}</span>
